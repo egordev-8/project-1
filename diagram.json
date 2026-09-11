@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "author": "Arduino Developer",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 120, "left": 0 },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": -120, "left": 80, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-pushbutton", "id": "btn_plus", "top": 350, "left": 80, "attrs": { "color": "green", "label": "+" } },
+    { "type": "wokwi-pushbutton", "id": "btn_minus", "top": 350, "left": 180, "attrs": { "color": "red", "label": "-" } },
+    { "type": "wokwi-led", "id": "power_board", "top": 120, "left": 350, "attrs": { "color": "blue", "label": "Силовая плата (PWM)" } },
+    { "type": "wokwi-resistor", "id": "terminal_electrode", "top": 100, "left": 480, "attrs": { "value": "0", "label": "ЭЛЕКТРОД (+)" } },
+    { "type": "wokwi-resistor", "id": "terminal_mass", "top": 180, "left": 480, "attrs": { "value": "0", "label": "МАССА (-)" } }
+  ],
+  "connections": [
+    [ "uno:A4", "lcd:SDA", "blue", [] ],
+    [ "uno:A5", "lcd:SCL", "yellow", [] ],
+    [ "uno:5V", "lcd:VCC", "red", [] ],
+    [ "uno:GND.1", "lcd:GND", "black", [] ],
+
+    [ "btn_plus:1.A", "uno:GND.1", "black", [] ],
+    [ "btn_plus:2.A", "uno:2", "green", [] ],
+    [ "btn_minus:1.A", "uno:GND.1", "black", [] ],
+    [ "btn_minus:2.A", "uno:3", "red", [] ],
+
+    [ "uno:9", "power_board:A", "orange", [] ],
+    [ "power_board:C", "uno:GND.2", "black", [] ],
+
+    [ "power_board:A", "terminal_electrode:1", "red", [] ],
+    [ "uno:GND.2", "terminal_mass:1", "black", [] ]
+  ]
+}
